@@ -8,7 +8,14 @@
 	    <script type="text/javascript" src="lib/js/jquery.js"></script>
 	    <script type="text/javascript" src="lib/js/bootstrap.js"></script>
 	    <script type="text/javascript" src="lib/js/bootstrap.min.js"></script>
-	    <script type="text/javascript" src="lib/js/bootstrap-collapse.js"></script>
+	    
+	    <!-- Custom Libraries -->
+	    <script type="text/javascript" src="javascript/conversion.js"></script>
+	    <script type="text/javascript" src="javascript/control.js"></script>
+	    <script type="text/javascript" src="javascript/ALU_functions.js"></script>
+	    <script type="text/javascript" src="javascript/registers/instruction_registers.js"></script>
+	    <script type="text/javascript" src="javascript/registers/file_registers.js"></script>
+	    <script type="text/javascript" src="javascript/registers/mem_registers.js"></script>
 	</head>
 	<body>
 	    
