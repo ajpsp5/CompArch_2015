@@ -6,7 +6,6 @@ function shiftLeft(value, shifts){
     var bitLength = value.length;
     var retval = BinaryToDecimal(value);
     retval = DecimalToBinary(retval << shifts);
-    console.log('retval: '+ retval);
     while(retval.length > bitLength){
         retval = retval.substr(1);  
     }
