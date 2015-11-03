@@ -32,7 +32,18 @@
                             <th>Index</th> <th>Variable</th> <th>Content</th>
                         </tr>
                         <tr>
-                            <td>1001</td> <td>$vo</td> <td><input type="text" placeholder="Value" /></td>
+						    <td>000</td> <td>$zero</td> <td><input type="text" placeholder="Value" /></td>
+							<td>001</td> <td>$v0</td> <td><input type="text" placeholder="Value" /></td>
+							<td>010</td> <td>$v1</td> <td><input type="text" placeholder="Value" /></td>
+							<td>011</td> <td>$v2</td> <td><input type="text" placeholder="Value" /></td>
+							<td>100</td> <td>$v3</td> <td><input type="text" placeholder="Value" /></td>
+							<td>101</td> <td>$t0</td> <td><input type="text" placeholder="Value" /></td>
+							<td>110</td> <td>$t1</td> <td><input type="text" placeholder="Value" /></td>
+							<td>111</td> <td>$t2</td> <td><input type="text" placeholder="Value" /></td>
+							<td>000</td> <td>$a0</td> <td><input type="text" placeholder="Value" /></td>
+							<td>001</td> <td>$a1</td> <td><input type="text" placeholder="Value" /></td>
+							<td>010</td> <td>$a2</td> <td><input type="text" placeholder="Value" /></td>
+							<td>011</td> <td>$a3</td> <td><input type="text" placeholder="Value" /></td>
                         </tr>
                     </table>
                   </div>
