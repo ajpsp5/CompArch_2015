@@ -67,6 +67,9 @@
                     </table>
                   </div>
                 </div>
+                <button class="btn btn-primary" style=" margin-bottom: 5px;" type="button" onclick="fetch();">
+                    Execute
+                </button>
             </div>
         </div>
     </body>
