@@ -58,21 +58,39 @@ function and(value1, value2){
 }
 
 function add(value1, value2){
+    var tmpLength = value1.length;
+    if(value1.length > value2.length)
+        tmpLength = value1.length;
+    else
+        tmpLength = value2.length;
     value1 = BinaryToDecimal(value1);
     value2 = BinaryToDecimal(value2);
     var total = value1 + value2;
-    return DecimalToBinary(total);
+    total = DecimalToBinary(total);
+    while(tmpLength > total.length){
+        total = '0'+total;
+    }
+    return total;
 }
 
 function sub(value1, value2){
-    value1 = BinaryToDecimal(value1);
+    var tmpLength = value1.length;
+	if(value1.length > value2.length)
+		tmpLength = value1.length;
+	else
+		tmpLength = value2.length;
+	value1 = BinaryToDecimal(value1);
     value2 = BinaryToDecimal(value2);
     var total = value1 - value2;
-    return DecimalToBinary(total);
+	total = DecimalToBinary(total);
+	while(tmpLength > total.length){
+		total = '0'+total;
+	}
+    return total;
 }
 
-//var tmp = and(DecimalToBinary(2), DecimalToBinary(6));
+//var tmp = sub('000100', DecimalToBinary(1));
 //console.log('Tmp: '+tmp);
 
-
+ 
 

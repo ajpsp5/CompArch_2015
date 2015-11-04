@@ -32,49 +32,45 @@
                             <th>Index</th> <th>Variable</th> <th>Content</th>
                         </tr>
                         <tr>
-							<td>000</td> <td>$zero</td> <td><input type="text" placeholder="Value" /></td>
-                        </tr>
-						<tr>
-							<td>001</td> <td>$v0</td> <td><input type="text" placeholder="Value" /></td>
+							<td>001</td> <td>$v0</td> <td><input id="v0Reg" type="text" placeholder="Value" onkeyup="fileRegister['001'] = this.value;" /></td>
 						</tr>
 						<tr>
-							<td>010</td> <td>$v1</td> <td><input type="text" placeholder="Value" /></td>
+							<td>010</td> <td>$v1</td> <td><input id="v1Reg" type="text" placeholder="Value" onkeyup="fileRegister['010'] = this.value;" /></td>
 						</tr>
 						<tr>
-							<td>011</td> <td>$v2</td> <td><input type="text" placeholder="Value" /></td>
+							<td>011</td> <td>$v2</td> <td><input id="v2Reg" type="text" placeholder="Value" onkeyup="fileRegister['011'] = this.value;" /></td>
 						</tr>
 						<tr>
-							<td>100</td> <td>$v3</td> <td><input type="text" placeholder="Value" /></td>
+							<td>100</td> <td>$v3</td> <td><input id="v3Reg" type="text" placeholder="Value" onkeyup="fileRegister['100'] = this.value;" /></td>
 						</tr>
 						<tr>
-							<td>101</td> <td>$t0</td> <td><input type="text" placeholder="Value" /></td>
+							<td>101</td> <td>$t0</td> <td><input id="t0Reg" type="text" placeholder="Value" onkeyup="fileRegister['101'] = this.value;" /></td>
 						</tr>
 						<tr>
-							<td>110</td> <td>$t1</td> <td><input type="text" placeholder="Value" /></td>
+							<td>110</td> <td>$t1</td> <td><input id="t1Reg" type="text" placeholder="Value" onkeyup="fileRegister['110'] = this.value;" /></td>
 						</tr>
 						<tr>
-							<td>111</td> <td>$t2</td> <td><input type="text" placeholder="Value" /></td>
+							<td>111</td> <td>$t2</td> <td><input id="t2Reg" type="text" placeholder="Value" onkeyup="fileRegister['111'] = this.value;" /></td>
 						</tr>
 						<tr>
-							<td>000</td> <td>$a0</td> <td><input type="text" placeholder="Value" /></td>
+							<td>000</td> <td>$a0</td> <td><input id="a0Reg" type="text" placeholder="Value" onkeyup="memRegister['000'] = this.value;" /></td>
 						</tr>
 						<tr>
-							<td>001</td> <td>$a1</td> <td><input type="text" placeholder="Value" /></td>
+							<td>001</td> <td>$a1</td> <td><input id="a1Reg" type="text" placeholder="Value" onkeyup="memRegister['001'] = this.value;" /></td>
 						</tr>
 						<tr>
-							<td>010</td> <td>$a2</td> <td><input type="text" placeholder="Value" /></td>
+							<td>010</td> <td>$a2</td> <td><input id="a2Reg" type="text" placeholder="Value" onkeyup="memRegister['010'] = this.value;" /></td>
 						</tr>
 						<tr>
-							<td>011</td> <td>$a3</td> <td><input type="text" placeholder="Value" /></td>
+							<td>011</td> <td>$a3</td> <td><input id="a3Reg" type="text" placeholder="Value" onkeyup="memRegister['011'] = this.value;" /></td>
 						</tr>
                     </table>
                   </div>
                 </div>
+                <button class="btn btn-primary" style=" margin-bottom: 5px;" type="button" onclick="fetch();">
+                    Execute
+                </button>
             </div>
-		    
-		    <h3>R-Type(16bit)<small> Custom</small></h3>
-		    <h3>I-Type(16bit)<small> Custom</small></h3>
-		    <h3>J-Type(16bit)<small> Custom</small></h3>
         </div>
     </body>
 </html>
