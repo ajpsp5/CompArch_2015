@@ -85,7 +85,7 @@ function rType(instr){
     var rt = instr[3];
     var funct = instr[4];
     
-    controlUnit(opcode);
+    var type = controlUnit(opcode);
 }
 
 //I-type - 4
@@ -95,7 +95,7 @@ function iType(instr){
     var rs = instr[2];
     var rt = instr[3];
     
-    controlUnit(opcode);
+    var type = controlUnit(opcode);
 }
 
 //J-type - 2
@@ -118,5 +118,5 @@ function branch(instr){
     var rt = instr[2];
     var address = instr[3];
     
-    controlUnit(opcode);
+    var type = controlUnit(opcode);
 }
