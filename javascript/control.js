@@ -41,11 +41,21 @@ function controlUnit(opcode){
     switch(opcode){
         case '0000'://Jump
             return 'jmp';
-        case '0001'://Branch Less than equal
+        case '0001'://Branch Less Than Equal
             return 'ble';
-        case '0010'://Branch greater than
+        case '0010'://Branch Greater Than
             return 'bgt';
-        case '1000'://Addi
+        case '0011'://Branch Less Than
+            return 'blt';
+        case '0100'://Branch Greater Than Equal
+            return 'bge';
+        case '0101'://Branch Equal
+            return 'beq';			
+        case '0110'://Addition
+            return 'add';
+        case '0111'://Subtraction
+            return 'sub';			
+        case '1000'://Add Immediate
             return 'addi';
         case '1001'://Shift Right
             return 'shiftRight';
@@ -53,23 +63,15 @@ function controlUnit(opcode){
             return 'shiftLeft';
         case '1011'://Or
             return 'or';
-        case '1100'://Xor
-            return 'xor';
-        case '1101'://Store Word
-            return 'storeWord';
         case '1100'://Load Word
             return 'loadWord';
+		case '1101'://Store Word
+		    return 'storeWord';
+		case '1110'://Exclusive Or (this is a new opcode for exclusive or)
+		    return 'xor';
         /*
-        case '':
-            break;
-        case '':
-            break;
-        case '':
-            break;
-        case '':
-            break;
-        case '':
-            break;
+        case '1111':
+            return '';
         */
     }
 }
