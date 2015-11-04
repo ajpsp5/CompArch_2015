@@ -86,6 +86,12 @@ function rType(instr){
     var funct = instr[4];
     
     var type = controlUnit(opcode);
+    switch(type){
+        case 'add':
+            add(rd, rs, rs);
+            break;
+    }
+    
 }
 
 //I-type - 4

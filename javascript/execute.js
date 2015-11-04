@@ -23,7 +23,8 @@ function bge(){
 function beq(){
 }
 
-function add(){
+function add(rd, rs, rs){
+    fileRegister[rd] = add(fileRegister[rs], fileRegister[rt]);
 }
 
 function sub(){
