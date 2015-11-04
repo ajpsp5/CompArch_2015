@@ -1,6 +1,11 @@
 //Execute Phase
 
-function jmp(){
+function jmp(address){
+    //Set PC Address
+	PC = address;
+	//Move PC Back One
+	PC = sub(address,DecimalToBinary(1));
+	fetch();
 }
 
 function ble(){
@@ -18,7 +23,8 @@ function bge(){
 function beq(){
 }
 
-function add(){
+function add(rd, rs, rs){
+    fileRegister[rd] = add(fileRegister[rs], fileRegister[rt]);
 }
 
 function sub(){
