@@ -1,6 +1,11 @@
 //Execute Phase
 
-function jmp(){
+function jmp(address){
+    //Set PC Address
+	PC = address;
+	//Move PC Back One
+	PC = sub(address,DecimalToBinary(1));
+	fetch();
 }
 
 function ble(){

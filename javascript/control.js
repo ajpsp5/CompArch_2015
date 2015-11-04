@@ -104,11 +104,10 @@ function jType(instr){
     var address = instr[1];
     
     var type = controlUnit(opcode);
-	//Set PC Address
-	PC = address;
-	//Move PC Back One
-	PC = sub(address,DecimalToBinary(1));
-	fetch();
+    if(type == 'jmp')
+        jmp(address);
+    else
+        console.log('Wrong Opcode ['+opcode+'] for J-Type Instr');
 }
 
 //Branch - 4
