@@ -40,26 +40,25 @@ function decode(instr){
 function controlUnit(opcode){
     switch(opcode){
         case '0000'://Jump
-            break;
+            return 'jmp';
         case '0001'://Branch Less than equal
-            break;
+            return 'ble';
         case '0010'://Branch greater than
-            break;
+            return 'bgt';
         case '1000'://Addi
-            console.log(opcode+': addi');
-            break;
+            return 'addi';
         case '1001'://Shift Right
-            break;
+            return 'shiftRight';
         case '1010'://Shift Left
-            break;
+            return 'shiftLeft';
         case '1011'://Or
-            break;
+            return 'or';
         case '1100'://Xor
-            break;
+            return 'xor';
         case '1101'://Store Word
-            break;
+            return 'storeWord';
         case '1100'://Load Word
-            break;
+            return 'loadWord';
         /*
         case '':
             break;
