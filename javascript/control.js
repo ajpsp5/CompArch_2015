@@ -101,7 +101,12 @@ function jType(instr){
     var opcode = instr[0];
     var address = instr[1];
     
-    controlUnit(opcode);
+    var type = controlUnit(opcode);
+	//Set PC Address
+	PC = address;
+	//Move PC Back One
+	PC = sub(address,DecimalToBinary(1));
+	fetch();
 }
 
 //Branch - 4
