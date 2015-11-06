@@ -23,11 +23,12 @@ function bge(){
 function beq(){
 }
 
-function add(rd, rs, rs){
+function add(rs, rt){
     fileRegister[rd] = add(fileRegister[rs], fileRegister[rt]);
 }
 
-function sub(){
+function sub(rs, rt){
+	fileRegister[rd] = sub(fileRegister[rs], fileRegister[rt]);
 }
 
 function addi(){
@@ -39,7 +40,8 @@ function srl(){
 function sll(){
 }
 
-function or(){
+function or(rs, rt){
+	fileRegister[rd] = or(fileRegister[rs], fileRegister[rt]);
 }
 
 function lw(){
@@ -48,5 +50,6 @@ function lw(){
 function sw(){
 }
 
-function xor(){
+function xor(rs, rt){
+	fileRegister[rd] = or(fileRegister[rs], fileRegister[rt]);
 }
