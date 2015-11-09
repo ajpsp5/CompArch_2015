@@ -78,7 +78,9 @@ function executeSub(rd, rs, rt){
 }
 
 function executeAddi(rd, rs, value){
+	console.log("adding ("+rs+" + "+value+") into ("+rd+")");
     fileRegister[rd] = addi(fileRegister[rs], value);
+	console.log(fileRegister);
     fetch();
 }
 
