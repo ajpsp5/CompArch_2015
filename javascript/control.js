@@ -10,30 +10,43 @@ function pc(){
 
 
 function fetch(){
+    console.log('============== Fetch ===================');
     var instruction = instrRegister[pc()];
-    decode(instruction);
+	console.log("instruction register after fetch: "+instruction);
+	fetchDecode = instruction;
+    //decode(instruction);
 }
 
 
 function decode(instr){
-    switch(instr.length){
-        //R-type - 5 
-        case 5:
-            rType(instr);
-            break;
-        //I-type - 4
-        case 4:
-            iType(instr);
-            break;
-        //J-type - 2
-        case 2:
-            jType(instr);
-            break;
-        //Branch - 4
-        case 4:
-            branch(instr);
-            break;
-    }
+    try{
+        if(instr.length){
+            decodeExecute = [];
+            console.log('============== Decode ===================');
+        }
+        switch(instr.length){
+            //R-type - 5 
+            case 5:
+			    console.log("opcode rtype");
+                rType(instr);
+                break;
+            //I-type - 4
+            case 4:
+			    console.log("opcode itype");
+                iType(instr);
+                break;
+            //J-type - 2
+            case 2:
+			    console.log("opcode jtype");
+                jType(instr);
+                break;
+            //Branch - 4
+            case 4:
+			    console.log("opcode btype");
+                branch(instr);
+                break;
+        }
+    }catch(e){}
 }
 
 
@@ -85,10 +98,47 @@ function rType(instr){
     var rt = instr[3];
     var funct = instr[4];
     
-    var type = controlUnit(opcode);
+    var type = controlUnit(opcode).trim();
+	console.log("control unit opcode is "+type);
+	decodeExecute['func'] = null;
+	decodeExecute['address'] = null;
+	
     switch(type){
         case 'add':
-            add(rd, rs, rs);
+            //decodeExecute = 'executeAdd('+rd+', '+rs+', '+rt+');';
+            decodeExecute['func'] = 'executeAdd';
+            decodeExecute['rd'] = rd;
+            decodeExecute['rs'] = rs;
+            decodeExecute['rt'] = rt;
+            break;
+		case 'or':
+		    console.log(rs);
+			//decodeExecute = 'executeOr('+rd+', '+rs+', '+rt+');';
+			decodeExecute['func'] = 'executeOr';
+			decodeExecute['rd'] = rd;
+            decodeExecute['rs'] = rs;
+            decodeExecute['rt'] = rt;
+			break;
+        case 'shiftLeft':
+            //decodeExecute = 'sll('+rd+', '+rs+', '+rt+');';
+            decodeExecute['func'] = 'sll';
+			decodeExecute['rd'] = rd;
+            decodeExecute['rs'] = rs;
+            decodeExecute['rt'] = rt;
+            break;
+        case 'shiftRight':
+            //decodeExecute = 'srl('+rd+', '+rs+', '+rt+');';
+            decodeExecute['func'] = 'srl';
+			decodeExecute['rd'] = rd;
+            decodeExecute['rs'] = rs;
+            decodeExecute['rt'] = rt;
+            break;
+        case 'xor':
+            //decodeExecute = 'executeXor('+rd+', '+rs+', '+rt+');';
+            decodeExecute['func'] = 'executeXor';
+			decodeExecute['rd'] = rd;
+            decodeExecute['rs'] = rs;
+            decodeExecute['rt'] = rt;
             break;
     }
     
@@ -102,6 +152,67 @@ function iType(instr){
     var rt = instr[3];
     
     var type = controlUnit(opcode);
+    console.log("control unit opcode is "+type);
+   decodeExecute['address'] = null;
+    
+    switch(type){
+        case 'loadWord':
+            //decodeExecute = 'lw('+rd+', '+rs+', '+rt+');';
+            decodeExecute['func'] = 'lw';
+			decodeExecute['rd'] = rd;
+            decodeExecute['rs'] = rs;
+            decodeExecute['rt'] = rt;
+            break;
+        case 'ble':
+            //decodeExecute = 'ble('+rd+', '+rs+', '+rt+');';
+            decodeExecute['func'] = 'ble';
+			decodeExecute['rd'] = rd;
+            decodeExecute['rs'] = rs;
+            decodeExecute['rt'] = rt;
+            break;
+        case 'storeWord':
+            //decodeExecute = 'sw('+rd+', '+rs+', '+rt+');';
+            decodeExecute['func'] = 'sw';
+			decodeExecute['rd'] = rd;
+            decodeExecute['rs'] = rs;
+            decodeExecute['rt'] = rt;
+            break;
+        case 'addi':
+            //decodeExecute = 'executeAddi('+rd+', '+rs+', '+rt+');';
+            decodeExecute['func'] = 'executeAddi';
+			decodeExecute['rd'] = rd;
+            decodeExecute['rs'] = rs;
+            decodeExecute['rt'] = rt;
+            break;
+        case 'bgt':
+            //decodeExecute = 'bgt('+rd+', '+rs+', '+rt+');';
+            decodeExecute['func'] = 'bgt';
+			decodeExecute['rd'] = rd;
+            decodeExecute['rs'] = rs;
+            decodeExecute['rt'] = rt;
+            break;
+        case 'blt':
+            //decodeExecute = 'blt('+rd+', '+rs+', '+rt+');';
+            decodeExecute['func'] = 'blt';
+			decodeExecute['rd'] = rd;
+            decodeExecute['rs'] = rs;
+            decodeExecute['rt'] = rt;
+            break;
+        case 'bge':
+            //decodeExecute = 'bge('+rd+', '+rs+', '+rt+');';
+            decodeExecute['func'] = 'bge';
+			decodeExecute['rd'] = rd;
+            decodeExecute['rs'] = rs;
+            decodeExecute['rt'] = rt;
+            break;
+        case 'beq':
+            //decodeExecute = 'beq('+rd+', '+rs+', '+rt+');';
+            decodeExecute['func'] = 'beq';
+			decodeExecute['rd'] = rd;
+            decodeExecute['rs'] = rs;
+            decodeExecute['rt'] = rt;
+            break;
+    }
 }
 
 //J-type - 2
@@ -110,9 +221,17 @@ function jType(instr){
     var address = instr[1];
     
     var type = controlUnit(opcode);
-    if(type == 'jmp')
-        jmp(address);
-    else
+    console.log("control unit opcode is "+type);
+    
+    if(type == 'jmp'){
+        //decodeExecute = 'jmp('+address+');';
+        decodeExecute['func'] = 'jmp';
+		decodeExecute['address'] = rd;
+		decodeExecute['func'] = null;
+		decodeExecute['rd'] = null;
+        decodeExecute['rs'] = null;
+        decodeExecute['rt'] = null;
+    }else
         console.log('Wrong Opcode ['+opcode+'] for J-Type Instr');
 }
 

@@ -23,14 +23,23 @@ function shiftRight(value, shifts){
 }
 
 function or(value1, value2){
+	var length =  value1.length;
     var value1 = BinaryToDecimal(value1);
     var value2 = BinaryToDecimal(value2);
     retval = DecimalToBinary(value1 | value2);
+	while(retval.length != length)
+		retval = '0'+retval;
     return retval;
 }
 
 function xor(value1, value2){
-    return value1 ^ value2;
+	var length =  value1.length;
+    var value1 = BinaryToDecimal(value1);
+    var value2 = BinaryToDecimal(value2);
+	retval = DecimalToBinary(value1 ^ value2);
+	while(retval.length != length)
+		retval = '0'+retval;
+    return retval;
 }
 
 function and(value1, value2){
@@ -63,6 +72,18 @@ function add(value1, value2){
         tmpLength = value1.length;
     else
         tmpLength = value2.length;
+    value1 = BinaryToDecimal(value1);
+    value2 = BinaryToDecimal(value2);
+    var total = value1 + value2;
+    total = DecimalToBinary(total);
+    while(tmpLength > total.length){
+        total = '0'+total;
+    }
+    return total;
+}
+
+function addi(value1, value2){
+    var tmpLength = value1.length;
     value1 = BinaryToDecimal(value1);
     value2 = BinaryToDecimal(value2);
     var total = value1 + value2;
