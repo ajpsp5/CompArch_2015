@@ -11,6 +11,7 @@ function pc(){
 
 function fetch(){
     var instruction = instrRegister[pc()];
+	console.log("instruction register after fetch: "+instruction);
     decode(instruction);
 }
 
@@ -19,18 +20,22 @@ function decode(instr){
     switch(instr.length){
         //R-type - 5 
         case 5:
+			console.log("opcode rtype");
             rType(instr);
             break;
         //I-type - 4
         case 4:
+			console.log("opcode itype");
             iType(instr);
             break;
         //J-type - 2
         case 2:
+			console.log("opcode jtype");
             jType(instr);
             break;
         //Branch - 4
         case 4:
+			console.log("opcode btype");
             branch(instr);
             break;
     }
@@ -85,10 +90,15 @@ function rType(instr){
     var rt = instr[3];
     var funct = instr[4];
     
-    var type = controlUnit(opcode);
+    var type = controlUnit(opcode).trim();
+	console.log("control unit opcode is "+type);
     switch(type){
         case 'add':
-            add(rd, rs, rs);
+            executeAdd(rd, rs, rt);
+            break;
+		case 'or':
+			console.log("case");
+            executeOr(rd, rs, rt);
             break;
     }
     
