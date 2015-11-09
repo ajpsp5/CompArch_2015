@@ -51,5 +51,5 @@ function sw(){
 }
 
 function xor(rd, rs, rt){
-	fileRegister[rd] = or(fileRegister[rs], fileRegister[rt]);
+	fileRegister[rd] = xor(fileRegister[rs], fileRegister[rt]);
 }
