@@ -13,6 +13,7 @@
 	    <script type="text/javascript" src="javascript/conversion.js"></script>
 	    <script type="text/javascript" src="javascript/control.js"></script>
 	    <script type="text/javascript" src="javascript/execute.js"></script>
+	    <script type="text/javascript" src="javascript/pipeline.js"></script>
 	    <script type="text/javascript" src="javascript/ALU_functions.js"></script>
 	    <script type="text/javascript" src="javascript/registers/instruction_registers.js"></script>
 	    <script type="text/javascript" src="javascript/registers/file_registers.js"></script>
@@ -68,7 +69,7 @@
                     </table>
                   </div>
                 </div>
-                <button class="btn btn-primary" style=" margin-bottom: 5px;" type="button" onclick="fetch();">
+                <button class="btn btn-primary" style=" margin-bottom: 5px;" type="button" onclick="pipe();">
                     Execute
                 </button>
             </div>
