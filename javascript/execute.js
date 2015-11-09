@@ -9,56 +9,56 @@ function jmp(address){
 }
 
 function ble(rs, rt, address){
+    console.log('Branching: if( '+rs+' <= '+rt+') goto '+address);
     rs = BinaryToDecimal(rs);
     rt = BinaryToDecimal(rt);
     
     if(rs <= rt){
-        PC = address;
-        fetch();
+        jmp(address);
         return;
     }    
 }
 
 function bgt(rs, rt, address){
+    console.log('Branching: if( '+rs+' > '+rt+') goto '+address);
     rs = BinaryToDecimal(rs);
     rt = BinaryToDecimal(rt);
     
     if(rs > rt){
-        PC = address;
-        fetch();
+        jmp(address);
         return;
     }
 }
 
 function blt(rs, rt, address){
+    console.log('Branching: if( '+rs+' > '+rt+') goto '+address);
     rs = BinaryToDecimal(rs);
     rt = BinaryToDecimal(rt);
     
     if(rs < rt){
-        PC = address;
-        fetch();
+        jmp(address);
         return;
     }
 }
 
 function bge(rs, rt, address){
+    console.log('Branching: if( '+rs+' >= '+rt+') goto '+address);
     rs = BinaryToDecimal(rs);
     rt = BinaryToDecimal(rt);
     
     if(rs >= rt){
-        PC = address;
-        fetch();
+        jmp(address);
         return;
     }
 }
 
 function beq(rs, rt, address){
+    console.log('Branching: if( '+rs+' == '+rt+') goto '+address);
     rs = BinaryToDecimal(rs);
     rt = BinaryToDecimal(rt);
     
     if(rs == rt){
-        PC = address;
-        fetch();
+        jmp(address);
         return;
     }
 }
@@ -83,12 +83,16 @@ function executeAddi(rd, rs, value){
 }
 
 function srl(rd, rs, rt){
+    console.log("Shifting Right ("+rs+" >> "+rt+") into ("+rd+")");
     fileRegister[rd] = shiftRight(fileRegister[rs], fileRegister[rt]);
+    console.log(fileRegister);
     fetch();
 }
 
-function sll(){
+function sll(rd, rs, rt){
+    console.log("Shifting Left ("+rs+" << "+rt+") into ("+rd+")");
     fileRegister[rd] = shiftLeft(fileRegister[rs], fileRegister[rt]);
+    console.log(fileRegister);
     fetch();
 }
 
@@ -100,24 +104,34 @@ function executeOr(rd, rs, rt){
 }
 
 function lw(rd, rs, address){
-    if(rs)
-    if(BinaryToDecimal(rs) != 0)
-        fileRegister[rd] = memRegister[add(address,  fileRegister[rs])];
+    console.log('Load Word');
+    console.log('Rd: '+rd+', Rs: '+rs+', Address: '+address);
+    if(rs){
+        if(BinaryToDecimal(rs) != 0)
+            fileRegister[rd] = memRegister[add(address,  fileRegister[rs])];
+    }
     else
         fileRegister[rd] = memRegister[address];
+    
+    console.log('File: ');
+    console.log(fileRegister);
+    console.log('Memory: ');
+    console.log(memRegister);
     fetch();
 }
 
 function sw(rd, rs, address){
-    if(rs)
-    if(BinaryToDecimal(rs) != 0)
-        memRegister[add(address,  fileRegister[rs])] = fileRegister[rd];
-    else
+    console.log('Save Word');
+    if(rs){
+        if(BinaryToDecimal(rs) != 0)
+            memRegister[add(address,  fileRegister[rs])] = fileRegister[rd];
+    }else
         memRegister[address] = fileRegister[rd];
+    console.log('File: '+fileRegister+', Mem: '+memRegister);    
     fetch();
 }
 
-function xor(rd, rs, rt){
+function executeXor(rd, rs, rt){
 	console.log("xor ("+rs+" xor "+rt+") into ("+rd+")");
 	fileRegister[rd] = xor(fileRegister[rs], fileRegister[rt]);
     console.log(fileRegister);

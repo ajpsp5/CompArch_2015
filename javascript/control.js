@@ -10,6 +10,7 @@ function pc(){
 
 
 function fetch(){
+    console.log('==========================================')
     var instruction = instrRegister[pc()];
 	console.log("instruction register after fetch: "+instruction);
     decode(instruction);
@@ -97,8 +98,16 @@ function rType(instr){
             executeAdd(rd, rs, rt);
             break;
 		case 'or':
-			console.log("case");
-            executeOr(rd, rs, rt);
+			executeOr(rd, rs, rt);
+            break;
+        case 'shiftLeft':
+            sll(rd, rs, rt);
+            break;
+        case 'shiftRight':
+            srl(rd, rs, rt);
+            break;
+        case 'xor':
+            executeXor(rd, rs, rt);
             break;
     }
     
@@ -112,6 +121,16 @@ function iType(instr){
     var rt = instr[3];
     
     var type = controlUnit(opcode);
+    console.log("control unit opcode is "+type);
+    
+    switch(type){
+        case 'loadWord':
+            lw(rd, rs, rt);
+            break;
+        case 'ble':
+            ble(rs, rt, rt);
+            break;
+    }
 }
 
 //J-type - 2
@@ -120,6 +139,8 @@ function jType(instr){
     var address = instr[1];
     
     var type = controlUnit(opcode);
+    console.log("control unit opcode is "+type);
+    
     if(type == 'jmp')
         jmp(address);
     else

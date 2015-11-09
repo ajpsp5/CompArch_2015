@@ -13,14 +13,14 @@ var instrRegister = [];
     instrRegister['000111'] = ['0000','000000001011'];
     
     instrRegister['001000'] = ['1010','011','010','011','000'];
-    instrRegister['001001'] = ['1100','100','011','100','000'];
+    instrRegister['001001'] = ['1110','100','011','100','000'];
     instrRegister['001010'] = ['1101','000','000','xxxxxx'];
     
     instrRegister['001011'] = ['1000','000','000','000010'];
     instrRegister['001100'] = ['0010','001','000','000001'];
     
 
-
+console.log('Instruction Register');
 console.log(instrRegister);
 
 
