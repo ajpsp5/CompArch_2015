@@ -11,5 +11,6 @@ var fileRegister = [];
     fileRegister['110'] = '';
     fileRegister['111'] = '';
 
+console.log(fileRegister);
 
 //Methods
