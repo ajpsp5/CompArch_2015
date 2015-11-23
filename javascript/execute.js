@@ -7,62 +7,76 @@ function jmp(address){
 	//PC = sub(address,DecimalToBinary(1));
 	executeMemory['address'] = address;
     executeMemory['type'] = 'jmp';
+	//PC = sub(address, '000001');
+	fetchDecode = null;
+	decodeExecute = null;
     //fetch();
 }
 
 function ble(rs, rt, address){
-    console.log('Branching: if( '+rs+' <= '+rt+') goto '+address);
-    rs = BinaryToDecimal(rs);
-    rt = BinaryToDecimal(rt);
+    console.log('Branching: if( '+rs+'['+fileRegister[rs]+'] <= '+rt+'['+fileRegister[rt]+']) goto '+address);
+    rs = BinaryToDecimal(fileRegister[rs]);
+    rt = BinaryToDecimal(fileRegister[rt]);
     
     if(rs <= rt){
         jmp(address);
         return;
-    }    
+    }
+	executeMemory['address'] = null;
+    executeMemory['type'] = null;
 }
 
 function bgt(rs, rt, address){
-    console.log('Branching: if( '+rs+' > '+rt+') goto '+address);
-    rs = BinaryToDecimal(rs);
-    rt = BinaryToDecimal(rt);
+    console.log('Branching: if( '+rs+'['+fileRegister[rs]+'] > '+rt+'['+fileRegister[rt]+']) goto '+address);
+    rs = BinaryToDecimal(fileRegister[rs]);
+    rt = BinaryToDecimal(fileRegister[rt]);
     
     if(rs > rt){
-        jmp(address);
+		jmp(address);
         return;
     }
+	decodeExecute['func'] = null;
+	executeMemory['address'] = null;
+    executeMemory['type'] = null;
 }
 
 function blt(rs, rt, address){
-    console.log('Branching: if( '+rs+' > '+rt+') goto '+address);
-    rs = BinaryToDecimal(rs);
-    rt = BinaryToDecimal(rt);
+    console.log('Branching: if( '+rs+'['+fileRegister[rs]+'] < '+rt+'['+fileRegister[rt]+']) goto '+address);
+    rs = BinaryToDecimal(fileRegister[rs]);
+    rt = BinaryToDecimal(fileRegister[rt]);
     
     if(rs < rt){
         jmp(address);
         return;
     }
+	executeMemory['address'] = null;
+    executeMemory['type'] = null;
 }
 
 function bge(rs, rt, address){
-    console.log('Branching: if( '+rs+' >= '+rt+') goto '+address);
-    rs = BinaryToDecimal(rs);
-    rt = BinaryToDecimal(rt);
+    console.log('Branching: if( '+rs+'['+fileRegister[rs]+'] >= '+rt+'['+fileRegister[rt]+']) goto '+address);
+    rs = BinaryToDecimal(fileRegister[rs]);
+    rt = BinaryToDecimal(fileRegister[rt]);
     
     if(rs >= rt){
         jmp(address);
         return;
     }
+	executeMemory['address'] = null;
+    executeMemory['type'] = null;
 }
 
 function beq(rs, rt, address){
-    console.log('Branching: if( '+rs+' == '+rt+') goto '+address);
-    rs = BinaryToDecimal(rs);
-    rt = BinaryToDecimal(rt);
+    console.log('Branching: if( '+rs+'['+fileRegister[rs]+'] == '+rt+'['+fileRegister[rt]+']) goto '+address);
+    rs = BinaryToDecimal(fileRegister[rs]);
+    rt = BinaryToDecimal(fileRegister[rt]);
     
     if(rs == rt){
         jmp(address);
         return;
     }
+	executeMemory['address'] = null;
+    executeMemory['type'] = null;
 }
 
 function executeAdd(rd, rs, rt){
