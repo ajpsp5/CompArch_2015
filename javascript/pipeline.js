@@ -1,7 +1,11 @@
+var html = "";
+var cycle = 1;
 var fetchDecode = null;
 var decodeExecute = null;
 var executeMemory = null;
 var memoryWrite = null;
+
+var stalls = 0;
 
 var pipeline = [];
     pipeline['fetch'] = null;
@@ -9,6 +13,7 @@ var pipeline = [];
     pipeline['execute'] = null;
     pipeline['memory'] = null;
     pipeline['write'] = null;
+
 
 /*
 setInterval(function(){ 
@@ -21,9 +26,22 @@ setInterval(function(){
 */
 
 function pipe(){
+    html = "";
+    html += '<li class="';
+    if(cycle == 1)
+        html += 'active'
+    html += '"><a href="#cycle'+cycle+'" role="tab" data-toggle="tab">Cycle #'+cycle+'</a></li>';
+    document.getElementById('tabs').innerHTML += html;
+    html = "";
+    html += '<div class="tab-pane ';
+    if(cycle == 1)
+        html += 'active'
+    html += '" id="cycle'+cycle+'">';
     console.log('=====================================');
     console.log('=====================================');
     console.log('=====================================');
+	console.log('FileRegister: ');
+	console.log(fileRegister);
     console.log('Fetch/Decode: '+ fetchDecode);
     console.log('Decode/Execute: ');
     console.log(decodeExecute);
@@ -40,8 +58,13 @@ function pipe(){
     writeBackStage();
     memoryStage();
     executeStage();
-    decode(fetchDecode);
-    fetch();
+	decode(fetchDecode);
+	if(stalls == 0){
+		fetch();
+	}
+    html += '</div>';
+    document.getElementById('panes').innerHTML += html;
+    cycle++;
 }
 
 function executeStage(){
@@ -85,18 +108,26 @@ function memoryStage(){
                     memoryWrite['type'] = null;
                     memoryWrite['rd'] = executeMemory['fileAddres'];
                     break;
+				case 'jmp':
+					fetchDecode = null;
+					decodeExecute = null;
+					console.log('Branching to address['+executeMemory['address']+']');
+					PC = sub(executeMemory['address'], '000001');
+					break;
             }
     }catch(e){}
     
     try{
         var tm = memoryWrite['rd'].length;
         
-        memoryWrite['finish'] = false;
-        memoryWrite['address'] = null;
-        memoryWrite['value'] = executeMemory['value'];
-        memoryWrite['type'] = null;
-        memoryWrite['rd'] = executeMemory['rd'];
-        console.log("Sending (value: "+executeMemory['value']+", rd: "+executeMemory['rd']+')');
+		if(executeMemory['value']){
+			memoryWrite['finish'] = false;
+			memoryWrite['address'] = null;
+			memoryWrite['value'] = executeMemory['value'];
+			memoryWrite['type'] = null;
+			memoryWrite['rd'] = executeMemory['rd'];
+			console.log("Sending (value: "+executeMemory['value']+", rd: "+executeMemory['rd']+')');
+		}
     }catch(e){}
     
     try{
@@ -122,6 +153,7 @@ function writeBackStage(){
         if(memoryWrite['value'] && memoryWrite['rd']){
             console.log('Setting: memValue['+memoryWrite['value']+'] into rd['+memoryWrite['rd']+']');
             fileRegister[memoryWrite['rd']] = memoryWrite['value'];
+			console.log(fileRegister);
         }
         if(memoryWrite['type']){
             console.log('Setting:  address['+memoryWrite['address']+'] - 1 to PC');
@@ -129,7 +161,7 @@ function writeBackStage(){
 	        PC = memoryWrite['address'];
 	        //Move PC Back One
 	        PC = sub(memoryWrite['address'],DecimalToBinary(1));
+			console.log(fileRegister);
         }
-        
     }catch(e){}
 }
