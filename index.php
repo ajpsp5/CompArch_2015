@@ -75,5 +75,30 @@
                 </button>
             </div>
         </div>
+        
+        <div id="registers">
+            <table width="100%">
+                <tr>
+                    <th>Instruction</th> <th>File</th> <th>Data Memory</th>
+                </tr>
+                <tr>
+                    <td style="padding:5px 15px 0 15px; vertical-align: text-top" id="instRegister" style="padding-left: 5px; padding-right: 5px;" width="40%"></td>
+                    <td style="padding:5px 15px 0 15px; vertical-align: text-top" id="fileRegister" style="padding-left: 5px; padding-right: 5px;" width="30%"></td>
+                    <td style="padding:5px 15px 0 15px; vertical-align: text-top;" id="dataRegister" style="padding-left: 5px; padding-right: 5px;" width="30%"></td>
+                </tr>
+            </table>
+        </div>
+        <br/>
+        <hr>
+        <!-- Nav tabs -->
+        <ul id="tabs" class="nav nav-tabs" role="tablist">
+          <!-- <li class="active"><a href="#cycle1" role="tab" data-toggle="tab">Home</a></li> -->
+        </ul>
+
+        <!-- Tab panes -->
+        <div id="panes" class="tab-content">
+          <!-- <div class="tab-pane active" id="cycle1">...</div> -->
+        </div>
+            
     </body>
 </html>

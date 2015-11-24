@@ -14,6 +14,55 @@ function fetch(){
     var instruction = instrRegister[pc()];
 	if(instruction){
 		console.log("instruction register after fetch: PC["+PC+"], instr["+instruction+"]");
+                html += '<div align="center">';
+                    html += '<h1>~~~ Fetch ~~~</h1><h2>Instruction</h2>';
+                    html += '<h3>';
+                        for(var each in instruction){
+                            html += '['+instruction[each]+']';
+                        }
+                    html += '</h3>';
+                html += '</div>';
+                
+                var tmp = '<div class="table-responsive">  <table class="table">';
+                    for(each in instrRegister){
+                        tmp += '<tr';
+                        if(each == PC){
+                            tmp += ' class="success"';
+                        }
+                        tmp += '>';
+                        tmp += '<td>#'+each+' |</td>';
+                        for(every in instrRegister[each])
+                            tmp += '<td>['+instrRegister[each][every].trim()+']</td>';
+                        tmp += '</tr>';
+                    }
+                    tmp += '</table></div>';
+                
+                document.getElementById('instRegister').innerHTML = tmp;
+                
+                var tmp = '<div class="table-responsive">  <table class="table">';
+                    tmp += '<tr> <th>Address</th> <th>Value</th> </tr>';
+                    for(each in fileRegister){
+                        tmp += '<tr>';
+                        tmp += '<td>#'+each+'</td>';
+                        tmp += '<td>['+fileRegister[each].trim()+']</td>';
+                        tmp += '</tr>';
+                    }
+                    tmp += '</table></div>';
+                
+                document.getElementById('fileRegister').innerHTML = tmp;
+                
+                var tmp = '<div class="table-responsive">  <table class="table">';
+                    tmp += '<tr> <th>Address</th> <th>Value</th> </tr>';
+                    for(each in memRegister){
+                        tmp += '<tr>';
+                        tmp += '<td>#'+each+'</td>';
+                        tmp += '<td>['+memRegister[each].trim()+']</td>';
+                        tmp += '</tr>';
+                    }
+                    tmp += '</table></div>';
+                
+                document.getElementById('dataRegister').innerHTML = tmp;
+                
 		fetchDecode = instruction;
 		//decode(instruction);
 	}else
@@ -152,6 +201,13 @@ function rType(instr){
 				console.log('xor: rd['+rd+'],rs['+rs+'],rt['+rt+']');
 				break;
 		}
+                
+                html += '<h1 align="center">~~~ Decode ~~~</h1><div align="center" style="padding-top: 10px; padding-left: 100px; padding-right: 100px;">';
+                    html += '<table class="table" >';
+                        html += '<thread><tr> <td>Func</td> <td>rd</td> <td>rs</td> <td>rt</td> </tr></thread>';
+                        html += '<tbody><tr><td>'+decodeExecute['func']+'</td> <td>'+decodeExecute['rd']+'</td> <td>'+decodeExecute['rs']+'</td> <td>'+decodeExecute['rt']+'</td></tr></tbody>';
+                    html += '</table>';
+                html += '</div>';
     }
 }
 
@@ -235,6 +291,13 @@ function iType(instr){
 				console.log('beq: rd['+rd+'],rs['+rs+'],rt['+rt+']');
 				break;
 		}
+                
+                html += '<h1 align="center">~~~ Decode ~~~</h1><div align="center" style="padding-top: 10px; padding-left: 100px; padding-right: 100px;">';
+                    html += '<table class="table" >';
+                        html += '<thread><tr> <td>Func</td> <td>rd</td> <td>rs</td> <td>rt</td> </tr></thread>';
+                        html += '<tbody><tr><td>'+decodeExecute['func']+'</td> <td>'+decodeExecute['rd']+'</td> <td>'+decodeExecute['rs']+'</td> <td>'+decodeExecute['rt']+'</td></tr></tbody>';
+                    html += '</table>';
+                html += '</div>';
 	}
 }
 

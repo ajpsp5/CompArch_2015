@@ -1,3 +1,5 @@
+var html = "";
+var cycle = 1;
 var fetchDecode = null;
 var decodeExecute = null;
 var executeMemory = null;
@@ -12,6 +14,7 @@ var pipeline = [];
     pipeline['memory'] = null;
     pipeline['write'] = null;
 
+
 /*
 setInterval(function(){ 
     fetch();
@@ -23,6 +26,17 @@ setInterval(function(){
 */
 
 function pipe(){
+    html = "";
+    html += '<li class="';
+    if(cycle == 1)
+        html += 'active'
+    html += '"><a href="#cycle'+cycle+'" role="tab" data-toggle="tab">Cycle #'+cycle+'</a></li>';
+    document.getElementById('tabs').innerHTML += html;
+    html = "";
+    html += '<div class="tab-pane ';
+    if(cycle == 1)
+        html += 'active'
+    html += '" id="cycle'+cycle+'">';
     console.log('=====================================');
     console.log('=====================================');
     console.log('=====================================');
@@ -48,6 +62,9 @@ function pipe(){
 	if(stalls == 0){
 		fetch();
 	}
+    html += '</div>';
+    document.getElementById('panes').innerHTML += html;
+    cycle++;
 }
 
 function executeStage(){

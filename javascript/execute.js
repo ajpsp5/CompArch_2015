@@ -22,8 +22,8 @@ function ble(rs, rt, address){
         jmp(address);
         return;
     }
-	executeMemory['address'] = null;
-    executeMemory['type'] = null;
+	decodeExecute = null;
+	executeMemory = null;
 }
 
 function bgt(rs, rt, address){
@@ -35,9 +35,8 @@ function bgt(rs, rt, address){
 		jmp(address);
         return;
     }
-	decodeExecute['func'] = null;
-	executeMemory['address'] = null;
-    executeMemory['type'] = null;
+	decodeExecute = null;
+	executeMemory = null;
 }
 
 function blt(rs, rt, address){
@@ -49,8 +48,8 @@ function blt(rs, rt, address){
         jmp(address);
         return;
     }
-	executeMemory['address'] = null;
-    executeMemory['type'] = null;
+	decodeExecute = null;
+	executeMemory = null;
 }
 
 function bge(rs, rt, address){
@@ -62,8 +61,8 @@ function bge(rs, rt, address){
         jmp(address);
         return;
     }
-	executeMemory['address'] = null;
-    executeMemory['type'] = null;
+	decodeExecute = null;
+	executeMemory = null;
 }
 
 function beq(rs, rt, address){
@@ -75,8 +74,8 @@ function beq(rs, rt, address){
         jmp(address);
         return;
     }
-	executeMemory['address'] = null;
-    executeMemory['type'] = null;
+	decodeExecute = null;
+	executeMemory = null;
 }
 
 function executeAdd(rd, rs, rt){
