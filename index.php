@@ -73,6 +73,9 @@
                 <button class="btn btn-primary" style=" margin-bottom: 5px;" type="button" onclick="pipe();">
                     Execute
                 </button>
+				<button id="autoBtn" class="btn btn-primary" style=" margin-bottom: 5px;" type="button" onclick="autoPipe();">
+                    Auto Execute
+                </button>
             </div>
         </div>
         
