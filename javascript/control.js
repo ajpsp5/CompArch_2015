@@ -312,13 +312,19 @@ function jType(instr){
     if(type == 'jmp'){
         //decodeExecute = 'jmp('+address+');';
         decodeExecute['func'] = 'jmp';
-		decodeExecute['address'] = rd;
-		decodeExecute['func'] = null;
+		decodeExecute['address'] = address.slice(6);
 		decodeExecute['rd'] = null;
         decodeExecute['rs'] = null;
         decodeExecute['rt'] = null;
     }else
         console.log('Wrong Opcode ['+opcode+'] for J-Type Instr');
+        
+    html += '<h1 align="center">~~~ Decode ~~~</h1><div align="center" style="padding-top: 10px; padding-left: 100px; padding-right: 100px;">';
+        html += '<table class="table" >';
+            html += '<thread><tr> <td>Func</td> <td>Address</td></tr></thread>';
+            html += '<tbody><tr><td>'+decodeExecute['func']+'</td> <td>'+decodeExecute['address']+'</td> </tr></tbody>';
+        html += '</table>';
+    html += '</div>';
 }
 
 //Branch - 4

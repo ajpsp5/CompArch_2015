@@ -15,20 +15,31 @@ function jmp(address){
 
 function ble(rs, rt, address){
     console.log('Branching: if( '+rs+'['+fileRegister[rs]+'] <= '+rt+'['+fileRegister[rt]+']) goto '+address);
-    rs = BinaryToDecimal(fileRegister[rs]);
+    
+	html += '<h1 align="center">~~~ Execute ~~~</h1><div align="center" style="padding-top: 10px; padding-left: 100px; padding-right: 100px;">';
+		html += '<h4>Branching: if( '+rs+'['+fileRegister[rs]+'] <= '+rt+'['+fileRegister[rt]+']) goto '+address+'</h4>';
+		html += '</div>';
+	
+	rs = BinaryToDecimal(fileRegister[rs]);
     rt = BinaryToDecimal(fileRegister[rt]);
     
     if(rs <= rt){
         jmp(address);
+		
         return;
     }
-	decodeExecute = null;
+    decodeExecute = null;
 	executeMemory = null;
 }
 
 function bgt(rs, rt, address){
     console.log('Branching: if( '+rs+'['+fileRegister[rs]+'] > '+rt+'['+fileRegister[rt]+']) goto '+address);
-    rs = BinaryToDecimal(fileRegister[rs]);
+    
+	html += '<h1 align="center">~~~ Execute ~~~</h1><div align="center" style="padding-top: 10px; padding-left: 100px; padding-right: 100px;">';
+		html += '<h4>Branching: if( '+rs+'['+fileRegister[rs]+'] > '+rt+'['+fileRegister[rt]+']) goto '+address+'</h4>';
+		html += '</div>';
+	
+	rs = BinaryToDecimal(fileRegister[rs]);
     rt = BinaryToDecimal(fileRegister[rt]);
     
     if(rs > rt){
@@ -41,7 +52,12 @@ function bgt(rs, rt, address){
 
 function blt(rs, rt, address){
     console.log('Branching: if( '+rs+'['+fileRegister[rs]+'] < '+rt+'['+fileRegister[rt]+']) goto '+address);
-    rs = BinaryToDecimal(fileRegister[rs]);
+    
+	html += '<h1 align="center">~~~ Execute ~~~</h1><div align="center" style="padding-top: 10px; padding-left: 100px; padding-right: 100px;">';
+		html += '<h4>Branching: if( '+rs+'['+fileRegister[rs]+'] < '+rt+'['+fileRegister[rt]+']) goto '+address+'</h4>';
+		html += '</div>';
+	
+	rs = BinaryToDecimal(fileRegister[rs]);
     rt = BinaryToDecimal(fileRegister[rt]);
     
     if(rs < rt){
@@ -54,7 +70,12 @@ function blt(rs, rt, address){
 
 function bge(rs, rt, address){
     console.log('Branching: if( '+rs+'['+fileRegister[rs]+'] >= '+rt+'['+fileRegister[rt]+']) goto '+address);
-    rs = BinaryToDecimal(fileRegister[rs]);
+    
+	html += '<h1 align="center">~~~ Execute ~~~</h1><div align="center" style="padding-top: 10px; padding-left: 100px; padding-right: 100px;">';
+		html += '<h4>Branching: if( '+rs+'['+fileRegister[rs]+'] >= '+rt+'['+fileRegister[rt]+']) goto '+address+'</h4>';
+		html += '</div>';
+	
+	rs = BinaryToDecimal(fileRegister[rs]);
     rt = BinaryToDecimal(fileRegister[rt]);
     
     if(rs >= rt){
@@ -67,7 +88,12 @@ function bge(rs, rt, address){
 
 function beq(rs, rt, address){
     console.log('Branching: if( '+rs+'['+fileRegister[rs]+'] == '+rt+'['+fileRegister[rt]+']) goto '+address);
-    rs = BinaryToDecimal(fileRegister[rs]);
+   
+	html += '<h1 align="center">~~~ Execute ~~~</h1><div align="center" style="padding-top: 10px; padding-left: 100px; padding-right: 100px;">';
+		html += '<h4>Branching: if( '+rs+'['+fileRegister[rs]+'] == '+rt+'['+fileRegister[rt]+']) goto '+address+'</h4>';
+		html += '</div>';
+	
+	rs = BinaryToDecimal(fileRegister[rs]);
     rt = BinaryToDecimal(fileRegister[rt]);
     
     if(rs == rt){
@@ -80,6 +106,11 @@ function beq(rs, rt, address){
 
 function executeAdd(rd, rs, rt){
     console.log("adding ("+rs+" + "+rt+") into ("+rd+")");
+	
+	html += '<h1 align="center">~~~ Execute ~~~</h1><div align="center" style="padding-top: 10px; padding-left: 100px; padding-right: 100px;">';
+		html += '<h4> adding (['+rs+'] + ['+rt+']) into (['+rd+'])</h4>';
+		html += '</div>';
+	
     executeMemory['value'] = add(fileRegister[rs], fileRegister[rt]);
     executeMemory['rd'] = rd;
     //fileRegister[rd] = add(fileRegister[rs], fileRegister[rt]);
@@ -89,6 +120,11 @@ function executeAdd(rd, rs, rt){
 
 function executeSub(rd, rs, rt){
 	console.log("subtracting ("+rs+" - "+rt+") into ("+rd+")");
+	
+	html += '<h1 align="center">~~~ Execute ~~~</h1><div align="center" style="padding-top: 10px; padding-left: 100px; padding-right: 100px;">';
+		html += '<h4> subtracting (['+rs+'] - ['+rt+']) into (['+rd+'])</h4>';
+		html += '</div>';
+	
 	executeMemory['value'] = sub(fileRegister[rs], fileRegister[rt]);
     executeMemory['rd'] = rd;
 	//fileRegister[rd] = sub(fileRegister[rs], fileRegister[rt]);
@@ -97,8 +133,13 @@ function executeSub(rd, rs, rt){
 }
 
 function executeAddi(rd, rs, value){
-    console.log("adding[im] ("+rs+" + "+value+") into ("+rd+")");
-    executeMemory['value'] = addi(fileRegister[rs], value);
+    console.log("adding[im] ("+rs+" + "+value+") into (["+rd+"])");
+    
+	html += '<h1 align="center">~~~ Execute ~~~</h1><div align="center" style="padding-top: 10px; padding-left: 100px; padding-right: 100px;">';
+		html += '<h4> adding[im] (['+rs+'] + '+value+') into (['+rd+'])</h4>';
+		html += '</div>';
+	
+	executeMemory['value'] = addi(fileRegister[rs], value);
     executeMemory['rd'] = rd;
     //fileRegister[rd] = addi(fileRegister[rs], value);
     console.log(fileRegister);
@@ -106,8 +147,13 @@ function executeAddi(rd, rs, value){
 }
 
 function srl(rd, rs, rt){
-    console.log("Shifting Right ("+rs+" >> "+rt+") into ("+rd+")");
-    executeMemory['value'] = shiftRight(fileRegister[rs], fileRegister[rt]);
+    console.log("Shifting Right ("+rs+" >> "+rt+") into (["+rd+"])");
+    
+	html += '<h1 align="center">~~~ Execute ~~~</h1><div align="center" style="padding-top: 10px; padding-left: 100px; padding-right: 100px;">';
+		html += '<h4> Shifting right (['+rs+'] >> ['+rt+']) into (['+rd+')</h4>';
+		html += '</div>';
+	
+	executeMemory['value'] = shiftRight(fileRegister[rs], fileRegister[rt]);
     executeMemory['rd'] = rd;
     //fileRegister[rd] = shiftRight(fileRegister[rs], fileRegister[rt]);
     console.log(fileRegister);
@@ -116,7 +162,12 @@ function srl(rd, rs, rt){
 
 function sll(rd, rs, rt){
     console.log("Shifting Left ("+rs+" << "+rt+") into ("+rd+")");
-    executeMemory['value'] = shiftLeft(fileRegister[rs], fileRegister[rt]);
+    
+	html += '<h1 align="center">~~~ Execute ~~~</h1><div align="center" style="padding-top: 10px; padding-left: 100px; padding-right: 100px;">';
+		html += '<h4> Shifting left (['+rs+'] << ['+rt+']) into (['+rd+'])</h4>';
+		html += '</div>';
+	
+	executeMemory['value'] = shiftLeft(fileRegister[rs], fileRegister[rt]);
     executeMemory['rd'] = rd;
     //fileRegister[rd] = shiftLeft(fileRegister[rs], fileRegister[rt]);
     console.log(fileRegister);
@@ -124,7 +175,7 @@ function sll(rd, rs, rt){
 }
 
 function executeOr(rd, rs, rt){
-    console.log("oring? ("+rs+" or "+rt+") into ("+rd+")");
+    console.log("oring? ("+rs+" or "+rt+") into (["+rd+"])");
 	executeMemory['value'] = or(fileRegister[rs], fileRegister[rt]);
     executeMemory['rd'] = rd;
 	//fileRegister[rd] = or(fileRegister[rs], fileRegister[rt]);
@@ -135,6 +186,11 @@ function executeOr(rd, rs, rt){
 function lw(rd, rs, address){
     console.log('Load Word');
     console.log('Rd: ('+rd+')'+fileRegister[rd]+', Rs: ('+rs+')'+fileRegister[rd]+', Address: ('+address+')'+memRegister[address]);
+	
+	html += '<h1 align="center">~~~ Execute ~~~</h1><div align="center" style="padding-top: 10px; padding-left: 100px; padding-right: 100px;">';
+		html += '<h4>Load Word: Rd: ('+rd+')'+fileRegister[rd]+', Rs: ('+rs+')'+fileRegister[rd]+', Address: ('+address+')'+memRegister[address]+'</h4>';
+		html += '</div>';
+	
     if(BinaryToDecimal(rs) != 0){
         executeMemory['memAddress'] = add(address,  fileRegister[rs]);
         executeMemory['fileAddres'] = rd;
@@ -157,6 +213,11 @@ function lw(rd, rs, address){
 
 function sw(rd, rs, address){
     console.log('Save Word');
+	
+	html += '<h1 align="center">~~~ Execute ~~~</h1><div align="center" style="padding-top: 10px; padding-left: 100px; padding-right: 100px;">';
+		html += '<h4> Store Word: Rd: ('+rd+')'+fileRegister[rd]+', Rs: ('+rs+')'+fileRegister[rd]+', Address: ('+address+')'+memRegister[address]+'</h4>';
+		html += '</div>';
+	
     console.log('Rd: ('+rd+')'+fileRegister[rd]+', Rs: ('+rs+')'+fileRegister[rd]+', Address: ('+address+')'+memRegister[address]);
     if(BinaryToDecimal(rs) != 0){
         executeMemory['memAddress'] = add(address,  fileRegister[rs]);
@@ -179,6 +240,11 @@ function sw(rd, rs, address){
 
 function executeXor(rd, rs, rt){
 	console.log("xor ("+rs+" xor "+rt+") into ("+rd+")");
+	
+	html += '<h1 align="center">~~~ Execute ~~~</h1><div align="center" style="padding-top: 10px; padding-left: 100px; padding-right: 100px;">';
+		html += '<h4> exclusive or (['+rs+'] xor ['+rt+']) into (['+rd+'])</h4>';
+		html += '</div>';
+	
 	executeMemory['value'] = xor(fileRegister[rs], fileRegister[rt]);
     executeMemory['rd'] = rd;
 	//fileRegister[rd] = xor(fileRegister[rs], fileRegister[rt]);
