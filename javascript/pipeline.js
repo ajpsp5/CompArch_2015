@@ -24,6 +24,25 @@ setInterval(function(){
     writeBackStage();
 }, 3000);  
 */
+attempt = 0;
+function autoPipe(){
+	document.getElementById('autoBtn').disable = true;
+	var clock = setInterval(function (){
+		pipe();
+		if(!(instrRegister.hasOwnProperty(PC))){
+			if(attempt > 2){
+				alert('Attempt :'+attempt);
+				clearInterval(clock);	
+			}else
+				attempt++;
+		}else{
+			attempt = 0;
+		}
+	}, 1000);
+	console.log('*****************'+PC+'*************************');
+	console.log(instrRegister);
+	
+}
 
 function pipe(){
     html = "";
@@ -70,11 +89,16 @@ function pipe(){
 function executeStage(){
     executeMemory = [];
     console.log('============== Execute ===================');
+   
+	
     var tmp = '';
     try{
         if(decodeExecute['address'] != null){
+			html += '<h1 align="center">~~~ Execute ~~~</h1><div align="center" style="padding-top: 10px; padding-left: 100px; padding-right: 100px;">';
+			html += '<h4>Jumping to Address : '+decodeExecute['address']+'</h4>';
+			html += '</div>';
             jmp(decodeExecute['address']);
-            return;
+			return;
         }
     }catch(e){}
     try{
@@ -94,7 +118,12 @@ function memoryStage(){
                 case 'sw':
                     memRegister[executeMemory['memAddress']] = fileRegister[executeMemory['fileAddres']];
                     console.log("Saving ("+fileRegister[executeMemory['fileAddres']]+") to "+executeMemory['memAddress']);
-                    memoryWrite['finish'] = true;
+                    
+					html += '<h1 align="center">~~~ Memory ~~~</h1><div align="center" style="padding-top: 10px; padding-left: 100px; padding-right: 100px;">';
+						html += '<h4>Saving (['+fileRegister[executeMemory['fileAddres']]+']) to (['+executeMemory['memAddress']+']) </h4>';
+						html += '</div>';
+					
+					memoryWrite['finish'] = true;
                     memoryWrite['address'] = null;
                     memoryWrite['value'] = null;
                     memoryWrite['type'] = null;
@@ -102,16 +131,26 @@ function memoryStage(){
                     break;
                 case 'lw':
                     console.log("Loading ("+memRegister[executeMemory['memAddress']]+") to "+executeMemory['fileAddres']);
-                    memoryWrite['finish'] = false;
+                    
+					html += '<h1 align="center">~~~ Memory ~~~</h1><div align="center" style="padding-top: 10px; padding-left: 100px; padding-right: 100px;">';
+						html += '<h4>Loading (['+memRegister[executeMemory['memAddress']]+']) to (['+executeMemory['fileAddres']+']) </h4>';
+						html += '</div>';
+					
+					memoryWrite['finish'] = false;
                     memoryWrite['address'] = null;
                     memoryWrite['value'] = memRegister[executeMemory['memAddress']];
-                    memoryWrite['type'] = null;
+                    memoryWrite['type'] = 'lw';
                     memoryWrite['rd'] = executeMemory['fileAddres'];
                     break;
 				case 'jmp':
 					fetchDecode = null;
 					decodeExecute = null;
-					console.log('Branching to address['+executeMemory['address']+']');
+					console.log('Jumping to address['+executeMemory['address']+']');
+					
+					html += '<h1 align="center">~~~ Memory ~~~</h1><div align="center" style="padding-top: 10px; padding-left: 100px; padding-right: 100px;">';
+						html += '<h4>Jumping to address(['+executeMemory['address']+'])</h4>';
+						html += '</div>';
+					
 					PC = sub(executeMemory['address'], '000001');
 					break;
             }
@@ -127,6 +166,11 @@ function memoryStage(){
 			memoryWrite['type'] = null;
 			memoryWrite['rd'] = executeMemory['rd'];
 			console.log("Sending (value: "+executeMemory['value']+", rd: "+executeMemory['rd']+')');
+			
+			html += '<h1 align="center">~~~ Memory ~~~</h1><div align="center" style="padding-top: 10px; padding-left: 100px; padding-right: 100px;">';
+			html += '<h4>Sending (value: '+executeMemory['value']+', rd: ['+executeMemory['rd']+'])</h4>';
+			html += '</div>';
+			
 		}
     }catch(e){}
     
@@ -139,6 +183,12 @@ function memoryStage(){
         memoryWrite['type'] = executeMemory['type'];
         memoryWrite['rd'] = null;
         console.log("Sending (address: "+executeMemory['address']+", type: "+executeMemory['type']+')');
+		
+		html += '<h1 align="center">~~~ Memory ~~~</h1><div align="center" style="padding-top: 10px; padding-left: 100px; padding-right: 100px;">';
+			html += '<h4>Sending (address: ['+executeMemory['address']+'], type: '+executeMemory['type']+')</h4>';
+			html += '</div>';
+		
+		
     }catch(e){}
 }
 
@@ -148,16 +198,31 @@ function writeBackStage(){
     try{
         if(memoryWrite['finish']){
             console.log('Nothing to do..');
-            return;
+            
+			html += '<h1 align="center">~~~ Write Back ~~~</h1><div align="center" style="padding-top: 10px; padding-left: 100px; padding-right: 100px;">';
+				html += '<h4>Nothing to do..</h4>';
+				html += '</div>';
+			
+			return;
         }
         if(memoryWrite['value'] && memoryWrite['rd']){
             console.log('Setting: memValue['+memoryWrite['value']+'] into rd['+memoryWrite['rd']+']');
+			stalls = 0;
+			html += '<h1 align="center">~~~ Write Back ~~~</h1><div align="center" style="padding-top: 10px; padding-left: 100px; padding-right: 100px;">';
+				html += '<h4>(Setting: memValue['+memoryWrite['value']+'] into rd['+memoryWrite['rd']+'])</h4>';
+				html += '</div>';
+			
             fileRegister[memoryWrite['rd']] = memoryWrite['value'];
 			console.log(fileRegister);
         }
-        if(memoryWrite['type']){
+        if(memoryWrite['type'] == 'jmp'){
             console.log('Setting:  address['+memoryWrite['address']+'] - 1 to PC');
-            //Set PC Address
+            
+			html += '<h1 align="center">~~~ Write Back ~~~</h1><div align="center" style="padding-top: 10px; padding-left: 100px; padding-right: 100px;">';
+				html += '<h4>(Setting:  address['+memoryWrite['address']+'] - 1 to PC)</h4>';
+				html += '</div>';
+			
+			//Set PC Address
 	        PC = memoryWrite['address'];
 	        //Move PC Back One
 	        PC = sub(memoryWrite['address'],DecimalToBinary(1));
