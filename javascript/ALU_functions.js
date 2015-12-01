@@ -86,7 +86,7 @@ function addi(value1, value2){
     var tmpLength = value1.length;
     value1 = BinaryToDecimal(value1);
     
-    if((value2.charAt(0) == '1') || (value2.charAt(0) == 1)){
+    if((value2.charAt(0) == '1') || (value2.charAt(0) == 1)){		
         var tmp = '';
         //Two's Comp
         for(each in value2){
@@ -108,6 +108,8 @@ function addi(value1, value2){
     }
     return total;
 }
+
+
 
 function sub(value1, value2){
     var tmpLength = value1.length;
