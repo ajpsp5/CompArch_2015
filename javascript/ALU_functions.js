@@ -85,7 +85,22 @@ function add(value1, value2){
 function addi(value1, value2){
     var tmpLength = value1.length;
     value1 = BinaryToDecimal(value1);
-    value2 = BinaryToDecimal(value2);
+    
+    if((value2.charAt(0) == '1') || (value2.charAt(0) == 1)){
+        var tmp = '';
+        //Two's Comp
+        for(each in value2){
+            
+            if(value2[each] == '0' || value2[each] == 0 ){
+                tmp += '1';
+            }else if(value2[each] == '1' || value2[each] == 1){
+                tmp += '0';
+            }
+        }
+        value2 = ~tmp;
+    }else
+        value2 = BinaryToDecimal(value2);
+    
     var total = value1 + value2;
     total = DecimalToBinary(total);
     while(tmpLength > total.length){

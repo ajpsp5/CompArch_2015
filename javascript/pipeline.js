@@ -38,7 +38,7 @@ function autoPipe(){
 		}else{
 			attempt = 0;
 		}
-	}, 1000);
+	}, 100);
 	console.log('*****************'+PC+'*************************');
 	console.log(instrRegister);
 	

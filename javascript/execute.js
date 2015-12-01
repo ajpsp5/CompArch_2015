@@ -17,11 +17,11 @@ function ble(rs, rt, address){
     console.log('Branching: if( '+rs+'['+fileRegister[rs]+'] <= '+rt+'['+fileRegister[rt]+']) goto '+address);
     
 	html += '<h1 align="center">~~~ Execute ~~~</h1><div align="center" style="padding-top: 10px; padding-left: 100px; padding-right: 100px;">';
-		html += '<h4>Branching: if( '+rs+'['+fileRegister[rs]+'] <= '+rt+'['+fileRegister[rt]+']) goto '+address+'</h4>';
+		html += '<h4>Branching: if( '+rs+'['+fileRegister[rs].replace(/\b0+/g, '')+'] <= '+rt+'['+fileRegister[rt].replace(/\b0+/g, '')+']) goto '+address+'</h4>';
 		html += '</div>';
 	
-	rs = BinaryToDecimal(fileRegister[rs]);
-    rt = BinaryToDecimal(fileRegister[rt]);
+	rs = BinaryToDecimal(fileRegister[rs].replace(/\b0+/g, ''));
+    rt = BinaryToDecimal(fileRegister[rt].replace(/\b0+/g, ''));
     
     if(rs <= rt){
         jmp(address);
@@ -36,11 +36,11 @@ function bgt(rs, rt, address){
     console.log('Branching: if( '+rs+'['+fileRegister[rs]+'] > '+rt+'['+fileRegister[rt]+']) goto '+address);
     
 	html += '<h1 align="center">~~~ Execute ~~~</h1><div align="center" style="padding-top: 10px; padding-left: 100px; padding-right: 100px;">';
-		html += '<h4>Branching: if( '+rs+'['+fileRegister[rs]+'] > '+rt+'['+fileRegister[rt]+']) goto '+address+'</h4>';
+		html += '<h4>Branching: if( '+rs+'['+fileRegister[rs].replace(/\b0+/g, '')+'] > '+rt+'['+fileRegister[rt].replace(/\b0+/g, '')+']) goto '+address+'</h4>';
 		html += '</div>';
 	
-	rs = BinaryToDecimal(fileRegister[rs]);
-    rt = BinaryToDecimal(fileRegister[rt]);
+	rs = BinaryToDecimal(fileRegister[rs].replace(/\b0+/g, '').trim());
+    rt = BinaryToDecimal(fileRegister[rt].replace(/\b0+/g, '').trim());
     
     if(rs > rt){
 		jmp(address);
@@ -54,11 +54,11 @@ function blt(rs, rt, address){
     console.log('Branching: if( '+rs+'['+fileRegister[rs]+'] < '+rt+'['+fileRegister[rt]+']) goto '+address);
     
 	html += '<h1 align="center">~~~ Execute ~~~</h1><div align="center" style="padding-top: 10px; padding-left: 100px; padding-right: 100px;">';
-		html += '<h4>Branching: if( '+rs+'['+fileRegister[rs]+'] < '+rt+'['+fileRegister[rt]+']) goto '+address+'</h4>';
+		html += '<h4>Branching: if( '+rs+'['+fileRegister[rs].replace(/\b0+/g, '')+'] < '+rt+'['+fileRegister[rt].replace(/\b0+/g, '')+']) goto '+address+'</h4>';
 		html += '</div>';
 	
-	rs = BinaryToDecimal(fileRegister[rs]);
-    rt = BinaryToDecimal(fileRegister[rt]);
+	rs = BinaryToDecimal(fileRegister[rs].replace(/\b0+/g, ''));
+    rt = BinaryToDecimal(fileRegister[rt].replace(/\b0+/g, ''));
     
     if(rs < rt){
         jmp(address);
@@ -72,11 +72,11 @@ function bge(rs, rt, address){
     console.log('Branching: if( '+rs+'['+fileRegister[rs]+'] >= '+rt+'['+fileRegister[rt]+']) goto '+address);
     
 	html += '<h1 align="center">~~~ Execute ~~~</h1><div align="center" style="padding-top: 10px; padding-left: 100px; padding-right: 100px;">';
-		html += '<h4>Branching: if( '+rs+'['+fileRegister[rs]+'] >= '+rt+'['+fileRegister[rt]+']) goto '+address+'</h4>';
+		html += '<h4>Branching: if( '+rs+'['+fileRegister[rs].replace(/\b0+/g, '')+'] >= '+rt+'['+fileRegister[rt].replace(/\b0+/g, '')+']) goto '+address+'</h4>';
 		html += '</div>';
 	
-	rs = BinaryToDecimal(fileRegister[rs]);
-    rt = BinaryToDecimal(fileRegister[rt]);
+	rs = BinaryToDecimal(fileRegister[rs].replace(/\b0+/g, ''));
+    rt = BinaryToDecimal(fileRegister[rt].replace(/\b0+/g, ''));
     
     if(rs >= rt){
         jmp(address);
@@ -90,11 +90,11 @@ function beq(rs, rt, address){
     console.log('Branching: if( '+rs+'['+fileRegister[rs]+'] == '+rt+'['+fileRegister[rt]+']) goto '+address);
    
 	html += '<h1 align="center">~~~ Execute ~~~</h1><div align="center" style="padding-top: 10px; padding-left: 100px; padding-right: 100px;">';
-		html += '<h4>Branching: if( '+rs+'['+fileRegister[rs]+'] == '+rt+'['+fileRegister[rt]+']) goto '+address+'</h4>';
+		html += '<h4>Branching: if( '+rs+'['+fileRegister[rs].replace(/\b0+/g, '')+'] == '+rt+'['+fileRegister[rt].replace(/\b0+/g, '')+']) goto '+address+'</h4>';
 		html += '</div>';
 	
-	rs = BinaryToDecimal(fileRegister[rs]);
-    rt = BinaryToDecimal(fileRegister[rt]);
+	rs = BinaryToDecimal(fileRegister[rs].replace(/\b0+/g, ''));
+    rt = BinaryToDecimal(fileRegister[rt].replace(/\b0+/g, ''));
     
     if(rs == rt){
         jmp(address);
@@ -139,7 +139,7 @@ function executeAddi(rd, rs, value){
 		html += '<h4> adding[im] (['+rs+'] + '+value+') into (['+rd+'])</h4>';
 		html += '</div>';
 	
-	executeMemory['value'] = addi(fileRegister[rs], value);
+	executeMemory['value'] = addi(fileRegister[rs],  value);
     executeMemory['rd'] = rd;
     //fileRegister[rd] = addi(fileRegister[rs], value);
     console.log(fileRegister);

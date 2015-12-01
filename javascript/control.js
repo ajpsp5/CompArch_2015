@@ -214,9 +214,9 @@ function rType(instr){
 //I-type - 4
 function iType(instr){
     var opcode = instr[0];
-    var rd = instr[1];
-    var rs = instr[2];
-    var rt = instr[3];
+    var rd = instr[1].trim();
+    var rs = instr[2].trim();
+    var rt = instr[3].trim();
     
     var type = controlUnit(opcode);
     console.log("control unit opcode is "+type);

@@ -4,7 +4,7 @@
 //Global Array
 var instrRegister = [];
     //instrRegister['000001'] = ['1011','001','010','011','000'];
-    /*
+    
     instrRegister['000001'] = ['1000','001','001', '111111'];
     instrRegister['000010'] = ['1100','101','000','000000'];
     instrRegister['000011'] = ['0001','101','110','001000'];
@@ -19,8 +19,9 @@ var instrRegister = [];
     
     instrRegister['001011'] = ['1000','000','000','000010'];
     instrRegister['001100'] = ['0010','001','000','000001'];
-    */
     
+	
+	/*
     instrRegister['000001'] = ['1000','001','001', '111111'];
     instrRegister['000010'] = ['1100','101','000','000000'];
     instrRegister['000011'] = ['0001','110','101','001000'];
@@ -36,7 +37,7 @@ var instrRegister = [];
     
     instrRegister['001011'] = ['1000','000','000','000010'];
     instrRegister['001100'] = ['0010','001','000','000001'];
-    
+    */
 
 console.log('Instruction Register');
 console.log(instrRegister);
