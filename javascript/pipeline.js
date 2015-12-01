@@ -207,6 +207,7 @@ function writeBackStage(){
         }
         if(memoryWrite['value'] && memoryWrite['rd']){
             console.log('Setting: memValue['+memoryWrite['value']+'] into rd['+memoryWrite['rd']+']');
+
 			stalls = 0;
 			html += '<h1 align="center">~~~ Write Back ~~~</h1><div align="center" style="padding-top: 10px; padding-left: 100px; padding-right: 100px;">';
 				html += '<h4>(Setting: memValue['+memoryWrite['value']+'] into rd['+memoryWrite['rd']+'])</h4>';
